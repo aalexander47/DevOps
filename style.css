@@ -1,0 +1,107 @@
+:root {
+	--size: 35vmin;
+	--fontsize: 6.5vmin;
+	--scale: 1.3;
+	--duration: 0.7s;
+}
+*,
+*:before,
+*:after {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+html,
+body {
+	background: lightblue;
+	overscroll-behavior-x: none;
+	overscroll-behavior-y: none;
+}
+body {
+	position: relative;
+	width: 100vw;
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font: 7vw -system-ui, sans-serif;
+	overflow: hidden;
+}
+
+.box,
+.box:before,
+.box:after,
+.box2,
+.box2:before {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background-color: royalblue;
+	width: var(--size);
+	height: var(--size);
+}
+.box {
+	position: relative;
+	background-color: unset;
+	font-size: var(--fontsize);
+	animation: scale forwards var(--duration) infinite ease-in-out alternate,
+		fontsize forwards var(--duration) infinite ease alternate;
+}
+.box:before {
+	transform: rotate(22deg);
+	content: "";
+}
+
+.box:after {
+	transform: rotate(-22deg);
+	content: "";
+}
+
+.box2 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	z-index: 1;
+}
+
+.box2:before {
+	transform: rotate(45deg);
+	content: "";
+	z-index: -1;
+}
+
+.box p {
+	color: white;
+	white-space: nowrap;
+	overflow: visible;
+}
+
+.box:hover:before,
+.box:hover:after,
+.box:hover .box2,
+.box:hover .box2:before {
+	border: 1px solid gray;
+	background-color: unset;
+}
+.box:hover p {
+	color: royalblue;
+}
+@keyframes scale {
+	0% {
+		transform: scale(1);
+	}
+	100% {
+		transform: scale(var(--scale));
+	}
+}
+
+@keyframes fontsize {
+	0% {
+		font-size: var(--fontsize);
+	}
+	100% {
+		font-size: calc(var(--fontsize) * var(--scale));
+	}
+}
